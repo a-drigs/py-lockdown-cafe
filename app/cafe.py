@@ -1,4 +1,5 @@
 import datetime
+
 from errors import (
     NotWearingMaskError, OutdatedVaccineError, NotVaccinatedError
 )
@@ -13,7 +14,7 @@ class Cafe:
             raise NotVaccinatedError("Visitor is not vaccinated")
         vaccine_data = visitor["vaccine"]
         expiration_date = vaccine_data.get("expiration_date")
-        if expiration_date > datetime.date.today():
+        if expiration_date < datetime.date.today():
             raise OutdatedVaccineError("Vaccine is outdated")
 
         if not visitor.get("wearing_a_mask", False):
